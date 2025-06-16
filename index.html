@@ -1,0 +1,288 @@
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda de Maquillaje Glam</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #e0789a;
+      color: #333;
+      padding: 1rem;
+    }
+
+    header {
+      background-color: #d63384;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 2rem;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .intro p {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .productos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .producto {
+      background: rgb(229, 107, 207);
+      border-radius: 15px;
+      padding: 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .producto:hover {
+      transform: scale(1.02);
+    }
+
+    .producto img {
+      width: 100%;
+      border-radius: 10px;
+      height: 180px;
+      object-fit: cover;
+      margin-bottom: 0.8rem;
+    }
+
+    .producto h3 {
+      color: #d63384;
+      margin-bottom: 0.5rem;
+    }
+
+    .producto ul {
+      list-style-type: square;
+      text-align: left;
+      padding-left: 1.2rem;
+      margin-bottom: 0.8rem;
+      color: #555;
+    }
+
+    .precio {
+      font-weight: bold;
+      color: #ad1049;
+      margin-bottom: 0.5rem;
+    }
+
+    .boton {
+      background-color: #de3f8f;
+      color: rgb(60, 3, 56);
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: background 0.3s ease;
+    }
+
+    .boton.agregado {
+      background-color: #28a745;
+    }
+
+    .graficos {
+      margin-top: 3rem;
+      background-color: #fce4ec;
+      padding: 2rem;
+      border-radius: 10px;
+    }
+
+    canvas {
+      max-width: 600px;
+      margin: 2rem auto;
+      display: block;
+    }
+
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Tienda Glam Makeup</h1>
+  </header>
+
+    <p>Bienvenida a nuestra tienda online. Aquí encontrarás productos de maquillaje de alta calidad para realzar tu belleza con estilo y glamour.</p>
+  </div>
+
+  <section class="productos">
+    <!-- Producto 1 -->
+    <div class="producto">
+      <img src="c:\Users\corte\Downloads\Labial_Cremoso_Rosa_Crush_Faces_Natura_3_5.jpg" alt="Labial Rosa Glam">
+      <h3>Labial Rosa Glam</h3>
+      <ul>
+        <li>Color intenso</li>
+        <li>Fórmula hidratante</li>
+        <li>Larga duración</li>
+      </ul>
+      <div class="precio">$14.99</div>
+      <button class="boton" onclick="agregarAlCarrito(this)">Agregar al carrito</button>
+    </div>
+
+    <!-- Producto 2 -->
+    <div class="producto">
+      <img src="c:\Users\corte\Downloads\162397-800-auto (1).webp" alt="Paleta de Sombras">
+      <h3>Paleta de Sombras Deluxe</h3>
+      <ul>
+        <li>12 tonos vibrantes</li>
+        <li>Acabado mate y brillante</li>
+        <li>Ideal para día y noche</li>
+      </ul>
+      <div class="precio">$29.99</div>
+      <button class="boton" onclick="agregarAlCarrito(this)">Agregar al carrito</button>
+    </div>
+
+    <!-- Producto 3 -->
+    <div class="producto">
+      <img src="c:\Users\corte\Downloads\R.png" alt="Base Líquida">
+      <h3>Base Líquida Natural</h3>
+      <ul>
+        <li>Cobertura media</li>
+        <li>Apto para piel sensible</li>
+        <li>Acabado natural</li>
+      </ul>
+      <div class="precio">$24.99</div>
+      <button class="boton" onclick="agregarAlCarrito(this)">Agregar al carrito</button>
+    </div>
+
+    <!-- Producto 4 -->
+    <div class="producto">
+      <img src="c:\Users\corte\Downloads\Delineador-Liquido-Precision-New-Color-51146.webp" alt="Delineador Precision">
+      <h3>Delineador Precision Black</h3>
+      <ul>
+        <li>Resistente al agua</li>
+        <li>Punta ultra fina</li>
+        <li>Duración 12 horas</li>
+      </ul>
+      <div class="precio">$9.99</div>
+      <button class="boton" onclick="agregarAlCarrito(this)">Agregar al carrito</button>
+    </div>
+  </section>
+
+  <!-- Gráficos -->
+  <section class="graficos">
+    <h2 style="text-align:center;">Estadísticas de Ventas</h2>
+    <canvas id="graficoBarras"></canvas>
+    <canvas id="graficoPastel"></canvas>
+  </section>
+
+  <footer>
+    © 2025 Tienda Glam Makeup - Todos los derechos reservados.
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    function agregarAlCarrito(boton) {
+      boton.textContent = "Compra lista ✅";
+      boton.classList.add("agregado");
+      boton.disabled = true;
+    }
+
+    // Gráfico de Barras
+    const ctxBarras = document.getElementById('graficoBarras').getContext('2d');
+    new Chart(ctxBarras, {
+      type: 'bar',
+      data: {
+        labels: ['Labial', 'Sombras', 'Base', 'Delineador'],
+        datasets: [{
+          label: 'Ventas (unidades)',
+          data: [120, 95, 78, 60],
+          backgroundColor: ['#d63384', '#c2185b', '#ad1457', '#880e4f']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: 'Ventas por Producto'
+          }
+        }
+      }
+    });
+
+    // Gráfico de Pastel
+    const ctxPastel = document.getElementById('graficoPastel').getContext('2d');
+    new Chart(ctxPastel, {
+      type: 'pie',
+      data: {
+        labels: ['Labial', 'Sombras', 'Base', 'Delineador'],
+        datasets: [{
+          label: 'Distribución de productos',
+          data: [30, 25, 25, 20],
+          backgroundColor: ['#f06292', '#ba68c8', '#9575cd', '#7986cb']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Distribución de Tipos de Productos'
+          }
+        }
+      }
+    });
+  </script>
+  <script>
+  document.addEventListener("mousemove", e => {
+    const heart = document.createElement("div");
+    heart.textContent = "🪼";
+    heart.className = "corazon-mouse";
+    heart.style.left = e.pageX + "px";
+    heart.style.top = e.pageY + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 1000);
+  });
+</script>
+
+<style>
+  .corazon-mouse {
+    position: absolute;
+    animation: subir-difuminar 1s ease forwards;
+    font-size: 18px;
+    pointer-events: none;
+  }
+
+  @keyframes subir-difuminar {
+    to {
+      transform: translateY(-40px);
+      opacity: 0;
+    }
+  }
+</style>
+</body>
+</html>
